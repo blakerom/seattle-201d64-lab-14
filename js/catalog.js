@@ -10,11 +10,10 @@ var cart = new Cart([]);
 function populateForm() {
 
   //TODO: Add an <option> tag inside the form's select for each product
-  var selectElement = document.getElementById('items');
+  var select = document.getElementById('items');
   for (var i in Product.allProducts) {
     console.log(Product.allProducts[i]);
 
-    var select = document.getElementById('items');
 
     var option = document.getElementById('option');
     option.textContent = Product.allProducts[i].name;
@@ -36,8 +35,9 @@ function handleSubmit(event) {
   // TODO: Prevent the page from reloading
   event.preventDefault();
 
-  var itemInCart = event.target.items.value;
+  var itemsToCart = event.target.items.value;
   var quantityToCart = event.target.quantity.value;
+  cart.addItem(itemsToCart,quantityToCart);
   // Do all the things ...
   addSelectedItemToCart();
   cart.saveToLocalStorage();
@@ -45,6 +45,9 @@ function handleSubmit(event) {
   updateCartPreview();
 
 }
+
+var stringyCartFromStorage = localStorage.getItem('items-in-cart');
+var arrayCartFromStorage = JSON.parse(stringyCartFromStorage);
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
