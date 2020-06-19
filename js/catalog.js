@@ -12,10 +12,10 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   var select = document.getElementById('items');
   for (var i in Product.allProducts) {
-    console.log(Product.allProducts[i]);
+  // console.log(Product.allProducts[i]);
 
 
-    var option = document.getElementById('option');
+    var option = document.createElement('option');
     option.textContent = Product.allProducts[i].name;
 
     select.appendChild(option);
@@ -48,12 +48,18 @@ function handleSubmit(event) {
 
 var stringyCartFromStorage = localStorage.getItem('items-in-cart');
 var arrayCartFromStorage = JSON.parse(stringyCartFromStorage);
+if (arrayCartFromStorage){
+  Product.allProducts = arrayCartFromStorage;
+}
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
   // TODO: get the quantity
   // TODO: using those, add one item to the Cart
+
+  // click event that targets listens to when they click on the one shown
+
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
@@ -63,6 +69,15 @@ function updateCounter() {}
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
+  for (var i = 0; i < Cart.length; i++){
+
+  }
+
+  var cartContents = document.getElementById('cartContents');
+  var cartTag = document.createElement('p');
+  cartTag.textContent = Cart;
+  cartContents.appendChild(cartTag);
+  console.log('cart? ', cartTag);
 }
 
 // Set up the "submit" event listener on the form.
